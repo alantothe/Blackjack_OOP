@@ -1,8 +1,9 @@
 class Card {
-    constructor(suit, face, value) {
+    constructor(suit, face, value, image) {
         this.suit = suit;
         this.face = face;
         this.value = value;
+        this.image = image;
     }
 }
 
@@ -20,10 +21,20 @@ class Deck {
                 if (face === "A") {
                     value = 11; // assign 11 to Ace
                 }
-                this.cards.push(new Card(suit, face, value));
+                let image = `cards/${face}_of_${suit.toLowerCase()}.png`;
+                this.cards.push(new Card(suit, face, value, image));
             }
         }
     }
+
+    draw() {
+        return this.cards.pop();
+    }
 }
 
-console.log(new Deck());
+const fullDeck = new Deck()
+
+const testDraw = fullDeck.draw();
+
+console.log(testDraw);
+
