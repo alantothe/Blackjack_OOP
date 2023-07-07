@@ -24,7 +24,7 @@ class Deck {
                 let image = `cards/${face}_of_${suit.toLowerCase()}.png`;
                 let hidden = true
 
-                this.cards.push(new Card(suit, face, value, image, hidden, count));
+                this.cards.push(new Card(suit, face, value, image, hidden));
             }
         }
     };
@@ -63,15 +63,37 @@ class Dealer {
     }
 };
 
+class Player {
+    constructor() {
+        this.hand = [];
+    }
+
+    receiveCard(card) {
+        card.hidden = false;
+        this.hand.push(card);
+    }
+
+    getHand() {
+        return this.hand;
+    }
+};
+
+
 const fullDeck = new Deck();
 
 const dealer = new Dealer();
+const player = new Player();
 const drawnCard1 = fullDeck.draw();
 const drawnCard2 = fullDeck.draw();
+const drawnCard3 = fullDeck.draw();
+const drawnCard4 = fullDeck.draw();
 
 dealer.receiveCard(drawnCard1);
-dealer.receiveCard(drawnCard2)
+dealer.receiveCard(drawnCard2);
+player.receiveCard(drawnCard3);
+player.receiveCard(drawnCard4);
 ;
 console.log(dealer.getHand());
+console.log(player.getHand());
 
 
