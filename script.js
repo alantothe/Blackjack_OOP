@@ -1,16 +1,16 @@
 class Card {
-    constructor(suit, face, value, image) {
+    constructor(suit, face, value, image, hidden) {
         this.suit = suit;
         this.face = face;
         this.value = value;
         this.image = image;
+        this.hidden = hidden;
     }
-}
+};
 
 class Deck {
     constructor() {
         this.cards = [];
-
         const suits = ["Clubs", "Diamonds", "Hearts", "Spades"];
         const faces = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
 
@@ -22,19 +22,56 @@ class Deck {
                     value = 11; // assign 11 to Ace
                 }
                 let image = `cards/${face}_of_${suit.toLowerCase()}.png`;
-                this.cards.push(new Card(suit, face, value, image));
+                let hidden = true
+
+                this.cards.push(new Card(suit, face, value, image, hidden, count));
             }
         }
-    }
+    };
 
     draw() {
-        return this.cards.pop();
+        let card = this.cards.pop();
+        return card;
     }
-}
 
-const fullDeck = new Deck()
+    shuffle(){
+       //Fisher-Yates-Shuffle
 
-const testDraw = fullDeck.draw();
+    }
+};
 
-console.log(testDraw);
+class Dealer {
+    constructor() {
+        this.hand = [];
+    }
+
+    receiveCard(card) {
+        if (this.hand.length === 0) {
+            card.hidden = true;
+        } else {
+            card.hidden = false;
+        }
+        this.hand.push(card);
+    }
+
+    revealFirstCard() {
+        this.hand[0].hidden = false;
+    }
+
+    getHand() {
+        return this.hand;
+    }
+};
+
+const fullDeck = new Deck();
+
+const dealer = new Dealer();
+const drawnCard1 = fullDeck.draw();
+const drawnCard2 = fullDeck.draw();
+
+dealer.receiveCard(drawnCard1);
+dealer.receiveCard(drawnCard2)
+;
+console.log(dealer.getHand());
+
 
