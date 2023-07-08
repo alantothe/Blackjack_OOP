@@ -34,11 +34,14 @@ class Deck {
         return card;
     }
 
-    shuffle(){
-       //Fisher-Yates-Shuffle
-
-    }
+    shuffle() {
+        for (let i = this.cards.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [this.cards[i], this.cards[j]] = [this.cards[j], this.cards[i]];
+        }
 };
+
+}
 
 class Dealer {
     constructor() {
@@ -61,6 +64,25 @@ class Dealer {
     getHand() {
         return this.hand;
     }
+    getHandValue() {
+        let value = 0;
+        let aces = 0;
+
+        for (let card of this.hand) {
+            value += card.value;
+            if (card.face === 'A') {
+                aces += 1;
+            }
+        }
+
+        // if value is over 21 and theres an ace in the hand, reduce value by 10
+        while (value > 21 && aces > 0) {
+            value -= 10;
+            aces -= 1;
+        }
+
+        return value;
+    }
 };
 
 class Player {
@@ -76,24 +98,70 @@ class Player {
     getHand() {
         return this.hand;
     }
+    getHandValue() {
+        let value = 0;
+        let aces = 0;
+
+        for (let card of this.hand) {
+            value += card.value;
+            if (card.face === 'A') {
+                aces += 1;
+            }
+        }
+
+        // If value is over 21 and there's an Ace in the hand, reduce value by 10
+        while (value > 21 && aces > 0) {
+            value -= 10;
+            aces -= 1;
+        }
+
+        return value;
+    }
 };
 
+class Game {
+    constructor() {
 
-const fullDeck = new Deck();
 
-const dealer = new Dealer();
-const player = new Player();
-const drawnCard1 = fullDeck.draw();
-const drawnCard2 = fullDeck.draw();
-const drawnCard3 = fullDeck.draw();
-const drawnCard4 = fullDeck.draw();
+    }
 
-dealer.receiveCard(drawnCard1);
-dealer.receiveCard(drawnCard2);
-player.receiveCard(drawnCard3);
-player.receiveCard(drawnCard4);
-;
-console.log(dealer.getHand());
-console.log(player.getHand());
+    startGame(){
+     const deck = new Deck()
+     const dealer = new Dealer()
+     const player = new Player()
+       deck.shuffle()
+       const drawnCard1 = deck.draw();
+       const drawnCard2 = deck.draw();
+       const drawnCard3 = deck.draw();
+       const drawnCard4 = deck.draw();
+
+       dealer.receiveCard(drawnCard1)
+       dealer.receiveCard(drawnCard2)
+       
+       player.receiveCard(drawnCard3)
+       player.receiveCard(drawnCard4) 
+       console.log(dealer.getHand())
+       console.log(player.getHand())
+       console.log(dealer.getHandValue())
+       console.log(player.getHandValue())
+       
+
+    
+    
+        
+        
+
+
+
+}
+
+   
+
+}
+
+let newGame = new Game()
+
+newGame.startGame()
+
 
 
