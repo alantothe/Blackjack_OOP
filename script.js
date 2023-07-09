@@ -170,7 +170,16 @@ class Game {
     playerHit() {
         this.player.receiveCard(this.deck.draw());
         this.updateDOM();
+        let playerScore = this.player.getHandValue()
+        if (playerScore > 21) {
+            setTimeout(() => this.playerBusts(), 500);  // delay 
+        }
+        if (playerScore === 21){
+            setTimeout(() => this.playerStand(), 500);  // delay 
+
+        }
     }
+    
 
     playerStand() {
         // reveal dealer's hidden card 
@@ -209,6 +218,13 @@ class Game {
         
         
     }
+
+    playerBusts() {
+        alert("Player busts!");
+        this.resetGame();
+    }
+
+
 
     resetGame() {
         newGame = new Game();  // reset newGame 
