@@ -117,14 +117,8 @@ class Player {
 
         return value;
     }
-    hit(){
-        
-        
-
-    }
-    stand(){
-
-    }
+ 
+    
 
 
 };
@@ -167,9 +161,9 @@ class Game {
         document.getElementById("dealerScore").textContent = this.dealer.getHandValue();
         document.getElementById("playerScore").textContent = this.player.getHandValue();
     }
-
     playerHit() {
-       
+        this.player.receiveCard(this.deck.draw());
+        this.updateDOM();
     }
 
     playerStand() {
@@ -180,6 +174,8 @@ class Game {
 window.onload = function() {
     let newGame = new Game();
     newGame.startGame();
+    document.getElementById("hitButton").addEventListener("click", () => newGame.playerHit());
+    document.getElementById("standButton").addEventListener("click", () => newGame.playerStand());
 
 }
 
