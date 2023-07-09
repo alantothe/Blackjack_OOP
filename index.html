@@ -8,19 +8,19 @@
 </head>
 <body>
 
-    <div id="startScreen">
+    <div id="startScreen" >
         <h1>Play Blackjack?</h1>
-        <button id="playButton">Gamba</button>
+        <button id="startButton">Gamba</button>
     </div>
 
-    <div id="balanceScreen">
+    <div id="balanceScreen" style="display: none">
         <p>Enter your starting balance:</p>
         <input type="number" id="balanceInput" min="1">
         <button id="playButton">Play Blackjack</button>
     </div>
 
 
-    <h1>Blackjack</h1>
+    <div id="gameScreen" style="display: none" >
 
     <div id="dealer">
         <h2>Dealer</h2>
@@ -36,7 +36,10 @@
 
     <button id="hitButton">Hit</button>
     <button id="standButton">Stand</button>
+    <button id="dealButton">Deal</button>
 
     <script src="script.js"></script>
+
+</div>
 </body>
 </html>
