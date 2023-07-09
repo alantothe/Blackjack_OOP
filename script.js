@@ -167,8 +167,39 @@ class Game {
     }
 
     playerStand() {
-        // dealer ai
+        // reveal dealer's hidden card 
+        this.dealer.revealFirstCard();
+        this.updateDOM();
+    
+        let drawInterval = setInterval(() => {
+            if (this.dealer.getHandValue() < 17) {
+                this.dealer.receiveCard(this.deck.draw());
+                this.updateDOM();
+            } else {
+                // dealer's turn is over(cancel interval)
+                clearInterval(drawInterval);
+    
+                // determine the winner
+                this.determineWinner();
+            }
+        }, 1000);  // draws a new card every second
     }
+    
+    
+    determineWinner() {
+        let playerScore = this.player.getHandValue();
+        let dealerScore = this.dealer.getHandValue();
+
+        if (playerScore > 21 || (dealerScore <= 21 && dealerScore > playerScore)) {
+            alert("Dealer wins!");
+        } else if (dealerScore > 21 || playerScore > dealerScore) {
+            alert("Player wins!");
+        } else {
+            alert("It's a tie!");
+        }
+    }
+    
+
 }
 
 window.onload = function() {
@@ -180,9 +211,7 @@ window.onload = function() {
 }
 
 
-let newGame = new Game()
 
-newGame.startGame()
 
 
 
