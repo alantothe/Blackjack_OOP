@@ -71,13 +71,17 @@ class Dealer {
         let aces = 0;
 
         for (let card of this.hand) {
+            if (card.hidden) { 
+                continue // skip the card if hidden
+            }
+
             value += card.value;
             if (card.face === 'A') {
                 aces += 1;
             }
         }
 
-        // if value is over 21 and theres an ace in the hand, reduce value by 10
+        // If value is over 21 and there's an Ace in the hand, reduce value by 10
         while (value > 21 && aces > 0) {
             value -= 10;
             aces -= 1;
@@ -207,8 +211,8 @@ class Game {
     }
 
     resetGame() {
-        newGame = new Game()  // reset newGame 
-        newGame.startGame()
+        newGame = new Game();  // reset newGame 
+        newGame.startGame();
     }
     
 
