@@ -117,47 +117,72 @@ class Player {
 
         return value;
     }
+    hit(){
+        
+        
+
+    }
+    stand(){
+
+    }
+
+
 };
 
 class Game {
     constructor() {
-
-
+        this.deck = new Deck();
+        this.dealer = new Dealer();
+        this.player = new Player();
     }
 
-    startGame(){
-     const deck = new Deck()
-     const dealer = new Dealer()
-     const player = new Player()
-       deck.shuffle()
-       const drawnCard1 = deck.draw();
-       const drawnCard2 = deck.draw();
-       const drawnCard3 = deck.draw();
-       const drawnCard4 = deck.draw();
+    startGame() {
+        this.deck.shuffle();
+        this.dealer.receiveCard(this.deck.draw());
+        this.dealer.receiveCard(this.deck.draw());
+        this.player.receiveCard(this.deck.draw());
+        this.player.receiveCard(this.deck.draw()); 
 
-       dealer.receiveCard(drawnCard1)
-       dealer.receiveCard(drawnCard2)
+        this.updateDOM();
+    }
+
+    updateDOM() {
+        // update dealer hand
+        let dealerHandElement = document.getElementById("dealerHand");
+        dealerHandElement.innerHTML = "";
+        for (let card of this.dealer.getHand()) {
+            let img = document.createElement('img');
+            img.src = card.hidden ? `cards/back_of_card.png` : card.image;
+            dealerHandElement.appendChild(img);
+        }
+        // Update player hand
+        let playerHandElement = document.getElementById("playerHand");
+        playerHandElement.innerHTML = "";
+        for (let card of this.player.getHand()) {
+            let img = document.createElement('img');
+            img.src = card.image;
+            playerHandElement.appendChild(img);
+        }
+        // update scores
+        document.getElementById("dealerScore").textContent = this.dealer.getHandValue();
+        document.getElementById("playerScore").textContent = this.player.getHandValue();
+    }
+
+    playerHit() {
        
-       player.receiveCard(drawnCard3)
-       player.receiveCard(drawnCard4) 
-       console.log(dealer.getHand())
-       console.log(player.getHand())
-       console.log(dealer.getHandValue())
-       console.log(player.getHandValue())
-       
+    }
 
-    
-    
-        
-        
+    playerStand() {
+        // dealer ai
+    }
+}
 
-
+window.onload = function() {
+    let newGame = new Game();
+    newGame.startGame();
 
 }
 
-   
-
-}
 
 let newGame = new Game()
 

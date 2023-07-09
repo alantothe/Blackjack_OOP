@@ -1,0 +1,10 @@
+#dealerHand, #playerHand {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+#dealerHand img, #playerHand img {
+    margin: 0 10px;
+    width: 100px;
+    height: 200px;
+}
