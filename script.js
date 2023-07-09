@@ -1,3 +1,5 @@
+let newGame = null;
+
 class Card {
     constructor(suit, face, value, image, hidden) {
         this.suit = suit;
@@ -192,18 +194,28 @@ class Game {
 
         if (playerScore > 21 || (dealerScore <= 21 && dealerScore > playerScore)) {
             alert("Dealer wins!");
+            this.resetGame()
         } else if (dealerScore > 21 || playerScore > dealerScore) {
             alert("Player wins!");
+            this.resetGame()
         } else {
             alert("It's a tie!");
+            this.resetGame()
         }
+        
+        
+    }
+
+    resetGame() {
+        newGame = new Game()  // reset newGame 
+        newGame.startGame()
     }
     
 
 }
 
 window.onload = function() {
-    let newGame = new Game();
+    newGame = new Game();
     newGame.startGame();
     document.getElementById("hitButton").addEventListener("click", () => newGame.playerHit());
     document.getElementById("standButton").addEventListener("click", () => newGame.playerStand());
