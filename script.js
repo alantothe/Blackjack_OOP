@@ -165,6 +165,8 @@ class Game {
         this.player.receiveCard(this.deck.draw()); 
 
         this.updateDOM();
+
+    
     }
 
     updateDOM() {
@@ -187,6 +189,13 @@ class Game {
         // update scores
         document.getElementById("dealerScore").textContent = this.dealer.getHandValue();
         document.getElementById("playerScore").textContent = this.player.getHandValue();
+
+        let playerScore = this.player.getHandValue();
+
+        if(playerScore === 21){
+            
+            setTimeout(() => this.playerBlackjack(), 500);  // delay 
+        }
     }
     playerHit() {
         this.player.receiveCard(this.deck.draw());
@@ -259,6 +268,17 @@ class Game {
             this.resetGame();
     }
 
+    playerBlackjack(){
+        
+        alert("Blackjack!");
+        balance.add(betAmount * 2)
+            betAmount = 0
+            document.getElementById('betAmount').textContent = `Bet Amount $${betAmount}`;
+            document.getElementById('balanceAmount').textContent = `Balance: $${balance.getBalance()}`; 
+            this.resetGame();
+
+    }
+
 
 
     resetGame() {
@@ -288,7 +308,7 @@ window.onload = function() {
     // event listeners
     document.getElementById('startButton').addEventListener('click', function() {
         startScreen.style.display = 'none';
-        balanceScreen.style.display = 'block';
+        balanceScreen.style.display = 'flex';
     });
 
     document.getElementById('playButton').addEventListener('click', function() {
@@ -299,7 +319,7 @@ window.onload = function() {
         // all good next page
         if (balanceInputValue) {
             balanceScreen.style.display = 'none';
-            gameScreen.style.display = 'block';
+            gameScreen.style.display = 'flex';
     
             // initialize balance object
             balance = new Balance(balanceInputValue);
@@ -313,6 +333,14 @@ window.onload = function() {
     });
 
     document.getElementById('dealButton').addEventListener('click', function() {
+
+        if(betAmount === 0){
+            alert("Place Bet")
+            throw new Error("Place Bet!");;
+            
+        }
+        else{
+
         newGame = new Game();
         newGame.startGame();
        
@@ -322,8 +350,8 @@ window.onload = function() {
         betButtons[i].disabled = true
     }
 
-    });
-
+    };
+})
     
     document.getElementById("hitButton").addEventListener("click", () => newGame.playerHit());
     

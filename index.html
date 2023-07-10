@@ -3,29 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Blackjack</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
     <div id="startScreen" >
+        <div id="screenBox">
+        <img id="cards-start-sreen" src="/pictures/Hand3.png">
         <h1>Play Blackjack?</h1>
-        <button id="startButton">Gamba</button>
+        <button id="startButton">gamba</button>
+        </div>
     </div>
 
+
     <div id="balanceScreen" style="display: none">
+        <div id="balanceBox">
+        <img id="cards-start-sreen" src="/pictures/Money.png">
         <p>Enter your starting balance:</p>
         <input type="number" id="balanceInput" min="1">
-        <button id="playButton">Play Blackjack</button>
+        <button id="playButton">play</button>
+        </div>
     </div>
 
 
     <div id="gameScreen" style="display: none" >
 
+        <div>
+            <h1 id="balanceAmount"></h1>
+        </div>
+
+
+    <div id="gameBox">
+
+
+
+    <div id="setSize">
+
+        
+
     <div id="dealer">
-        <h2>Dealer</h2>
+        
         <div id="dealerHand"></div>
-        <h3>Score: <span id="dealerScore">0</span></h3>
+        <h3><span id="dealerScore"></span></h3>
     </div>
 
 
@@ -38,25 +58,24 @@
 
 
     <div id="player">
-        <h2>Player</h2>
+        
         <div id="playerHand"></div>
-        <h3>Score: <span id="playerScore">0</span></h3>
+        <h3><span id="playerScore"></span></h3>
     </div>
-
+    </div>
+    <div id="play-buttons" >
     <button  id="hitButton">Hit</button>
     <button  id="standButton">Stand</button>
     <button class="bet-button" id="dealButton">Deal</button>
-    <button class="bet-button" id="add1">Add $1</button>
-    <button class="bet-button" id="add5">Add $5</button>
-    <button class="bet-button" id="add10">Add $10</button>
-    <button class="bet-button" id="add50">Add $50</button>
-    <button class="bet-button" id="add100">Add $100</button>
-
-
+    </div>
+    <div id="gamba-buttons" >
+    <button class="bet-button" id="add1">$1</button>
+    <button class="bet-button" id="add5">$5</button>
+    <button class="bet-button" id="add10">$10</button>
+    <button class="bet-button" id="add50">$50</button>
+    <button class="bet-button" id="add100">$100</button>
     <button id="quit">Quit</button>
-    
-    <div>
-        <h1 id="balanceAmount"></h1>
+    </div>
     </div>
     
     

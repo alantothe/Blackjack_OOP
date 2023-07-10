@@ -1,10 +1,207 @@
-#dealerHand, #playerHand {
+html, body {
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#startScreen, #balanceScreen {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(71, 0, 164, 0.8); /* semi-transparent */
+    padding: 20px;
+    text-align: center;
     display: flex;
     justify-content: center;
-    padding: 20px;
+    align-items: center;
+    flex-direction: column;
 }
-#dealerHand img, #playerHand img {
-    margin: 0 10px;
-    width: 100px;
+
+#screenBox, #balanceBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 400px;
+    height: 400px;
+    background-color: #313131;
+    color: antiquewhite;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+    font-weight: bold;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border-radius: 15px;
+}
+
+#gameBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 1000px;
+    height: 800px;
+    background-color: #313131;
+    color: antiquewhite;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+    font-weight: bold;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border-radius: 15px;
+}
+#gameBox, #setSize {
+    width: 1200px;
+    height: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+
+}
+
+input{
+    margin-bottom: 20px;
+    
+}
+
+
+
+#cards-start-sreen {
+    animation: bounce 2s infinite;
+    
+    filter: sepia(100%);
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+
+
+
+
+#gameScreen {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(71, 0, 164, 0.8); 
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+    
+}
+
+#dealer, #player {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+
+}
+
+
+#dealerScore {
+  
+    border-radius: 50%;
+    margin-left: 50px; 
+    color: antiquewhite;
+    font-size:xx-large;
+}
+
+
+
+#playerScore {
+  
+    border-radius: 50%;
+    margin-left: 50px; 
+    color: antiquewhite;
+    font-size:xx-large;
+}
+
+button {
+    border: none;
+    color: white;
+    text-align: center;
+    display: inline-block;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 15px;
+    font-size: 16px;
+    background-color: #252525;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    width:100px;
+    height:50px;
+    font-size: larger;
+    font-weight: bold;
+    
+    
+}
+
+button:hover {
+    background-color: #711cc5;
+    color: white;
+}
+
+#play-buttons{
+   border-radius: 0;
+   margin-bottom: 30px;
+
+   
+
+
+}
+
+img {
+    width: 80px;
+    height: 120px;
+    margin: 0 5px;
+    
+}
+
+#balanceAmount {
+
+    background-color: #1e201e;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    color: antiquewhite;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+
+.dealerHand{
+    background-color: #ffffff;
+    border-radius: 5px;
+
+}
+
+#gamba-buttons{
+    padding-bottom: 30px;
+}
+
+#dealerHand img {
+    background-color: white;
+    border-radius: 7px;
+    width: 120px;
     height: 200px;
 }
+
+#playerHand img {
+    background-color: white;
+    border-radius: 7px;
+    width: 120px;
+    height: 200px;
+}
+
+/* #dealButton{
+    background-color: #711cc5;
+} */
