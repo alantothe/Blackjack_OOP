@@ -9,7 +9,7 @@ class Balance {
     }
 
     add(amount) {
-        this.balance += amount;
+        this.balance += amount ;
     }
 
     deduct(amount) {
@@ -25,9 +25,6 @@ class Balance {
         return this.balance;
     }
 }
-
-
-
 class Card {
     constructor(suit, face, value, image, hidden) {
         this.suit = suit;
@@ -37,7 +34,6 @@ class Card {
         this.hidden = hidden;
     }
 };
-
 class Deck {
     constructor() {
         this.cards = [];
@@ -72,7 +68,6 @@ class Deck {
 };
 
 }
-
 class Dealer {
     constructor() {
         this.hand = [];
@@ -118,7 +113,6 @@ class Dealer {
         return value;
     }
 };
-
 class Player {
     constructor() {
         this.hand = [];
@@ -156,7 +150,6 @@ class Player {
 
 
 };
-
 class Game {
     constructor() {
         this.deck = new Deck();
@@ -237,17 +230,22 @@ class Game {
             alert("Dealer wins!");
             betAmount = 0
             document.getElementById('betAmount').textContent = `Bet Amount $${betAmount}`;
-            this.resetGame()
+            document.getElementById('balanceAmount').textContent = `Balance: $${balance.getBalance()}`; 
+            this.resetGame();
         } else if (dealerScore > 21 || playerScore > dealerScore) {
             alert("Player wins!");
+            balance.add(betAmount * 2)
             betAmount = 0
             document.getElementById('betAmount').textContent = `Bet Amount $${betAmount}`;
-            this.resetGame()
+            document.getElementById('balanceAmount').textContent = `Balance: $${balance.getBalance()}`; 
+            this.resetGame();
         } else {
             alert("Push");
+            balance.add(betAmount)
             betAmount = 0
             document.getElementById('betAmount').textContent = `Bet Amount $${betAmount}`;
-            this.resetGame()
+            document.getElementById('balanceAmount').textContent = `Balance: $${balance.getBalance()}`; 
+            this.resetGame();
         }
         
         
@@ -255,15 +253,24 @@ class Game {
 
     playerBusts() {
         alert("Player busts!");
-        this.resetGame();
+        betAmount = 0
+            document.getElementById('betAmount').textContent = `Bet Amount $${betAmount}`;
+            document.getElementById('balanceAmount').textContent = `Balance: $${balance.getBalance()}`; 
+            this.resetGame();
     }
 
 
 
     resetGame() {
         newGame = new Game();  // reset newGame 
-        newGame.startGame();
+        newGame.updateDOM();
+        // enable all bet buttons
+        let betButtons = document.querySelectorAll('.bet-button');
+        for (let i = 0; i < betButtons.length; i++) {
+            betButtons[i].disabled = false;
+        }
     }
+    
     
 
 }
@@ -273,6 +280,8 @@ window.onload = function() {
     const startScreen = document.getElementById('startScreen');
     const balanceScreen = document.getElementById('balanceScreen');
     const gameScreen = document.getElementById('gameScreen');
+    const betButtons = document.querySelectorAll('.bet-button');
+    
     document.getElementById('betAmount').textContent = `Bet Amount $${betAmount}`;
 
 
@@ -302,17 +311,22 @@ window.onload = function() {
             alert('Please enter your starting balance.');
         }
     });
-    
-    document.getElementById('quit').addEventListener('click', function(){
-        location.reload();
-    })
 
     document.getElementById('dealButton').addEventListener('click', function() {
         newGame = new Game();
         newGame.startGame();
+       
+    // disable all bet buttons
+    let betButtons = document.querySelectorAll('.bet-button');
+    for (let i = 0; i < betButtons.length; i++) {
+        betButtons[i].disabled = true
+    }
+
     });
 
+    
     document.getElementById("hitButton").addEventListener("click", () => newGame.playerHit());
+    
     document.getElementById("standButton").addEventListener("click", () => newGame.playerStand());
     
     document.getElementById("add1").addEventListener("click", () => {
@@ -360,6 +374,9 @@ window.onload = function() {
         document.getElementById('betAmount').textContent = `Bet Amount $${betAmount}`;
         console.log('Balance input changed to: ' + balance.getBalance());
         console.log(betAmount);
+    })
+    document.getElementById('quit').addEventListener('click', function(){
+        location.reload();
     })
 
 
