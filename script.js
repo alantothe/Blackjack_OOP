@@ -202,7 +202,8 @@ class Game {
         this.updateDOM();
         let playerScore = this.player.getHandValue()
         if (playerScore > 21) {
-            setTimeout(() => this.playerBusts(), 500);  // delay 
+            setTimeout(() => this.playerBusts(), 500);  // delay
+            
         }
         if (playerScore === 21){
             setTimeout(() => this.playerStand(), 500);  // delay 
@@ -353,7 +354,18 @@ window.onload = function() {
     };
 })
     
-    document.getElementById("hitButton").addEventListener("click", () => newGame.playerHit());
+    document.getElementById("hitButton").addEventListener("click", () => {
+        if (betAmount ===0 ){
+            alert("Place Bet")
+            throw new Error("Place Bet!");;
+
+        }
+        else{
+        newGame.playerHit()
+        }
+    
+    });
+    
     
     document.getElementById("standButton").addEventListener("click", () => newGame.playerStand());
     
