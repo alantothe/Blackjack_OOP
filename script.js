@@ -1,4 +1,32 @@
 let newGame = null;
+let balanceInput = document.getElementById('balanceInput');
+let balance = null; 
+let betAmount = 0
+
+class Balance {
+    constructor(balance){
+        this.balance = balance
+    }
+
+    add(amount) {
+        this.balance += amount;
+    }
+
+    deduct(amount) {
+        if (this.balance < amount) {
+            alert("Not enough balance")
+            throw new Error("Not enough balance");
+            
+        }
+        this.balance -= amount;
+    }
+
+    getBalance() {
+        return this.balance;
+    }
+}
+
+
 
 class Card {
     constructor(suit, face, value, image, hidden) {
@@ -235,15 +263,107 @@ class Game {
 }
 
 window.onload = function() {
-    newGame = new Game();
-    newGame.startGame();
+    // elements
+    const startScreen = document.getElementById('startScreen');
+    const balanceScreen = document.getElementById('balanceScreen');
+    const gameScreen = document.getElementById('gameScreen');
+    document.getElementById('betAmount').textContent = `Bet Amount $${betAmount}`;
+
+
+    // event listeners
+    document.getElementById('startButton').addEventListener('click', function() {
+        startScreen.style.display = 'none';
+        balanceScreen.style.display = 'block';
+    });
+
+    document.getElementById('playButton').addEventListener('click', function() {
+        // grab input value
+        let balanceInputValue = parseInt(balanceInput.value);
+        console.log('Balance input changed to: ' + balanceInputValue);
+    
+        // all good next page
+        if (balanceInputValue) {
+            balanceScreen.style.display = 'none';
+            gameScreen.style.display = 'block';
+    
+            // initialize balance object
+            balance = new Balance(balanceInputValue);
+    
+            // update the balance amount displayed on the screen
+            document.getElementById('balanceAmount').textContent = `Balance: $${balance.getBalance()}`;
+        } else {
+            // if balance is empty
+            alert('Please enter your starting balance.');
+        }
+    });
+    
+    document.getElementById('quit').addEventListener('click', function(){
+        location.reload();
+    })
+
+    document.getElementById('dealButton').addEventListener('click', function() {
+        newGame = new Game();
+        newGame.startGame();
+    });
+
     document.getElementById("hitButton").addEventListener("click", () => newGame.playerHit());
     document.getElementById("standButton").addEventListener("click", () => newGame.playerStand());
+    
+    document.getElementById("add1").addEventListener("click", () => {
+        const bet1 = 1; 
+        balance.deduct(bet1); 
+        betAmount += 1
+        document.getElementById('balanceAmount').textContent = `Balance: $${balance.getBalance()}`; 
+        document.getElementById('betAmount').textContent = `Bet Amount $${betAmount}`;
+        console.log('Balance input changed to: ' + balance.getBalance());
+        console.log(betAmount);
+
+    })
+
+    document.getElementById("add5").addEventListener("click", () => {
+        const bet1 = 5; 
+        balance.deduct(bet1);
+        betAmount += 5; 
+        document.getElementById('balanceAmount').textContent = `Balance: $${balance.getBalance()}`; 
+        document.getElementById('betAmount').textContent = `Bet Amount $${betAmount}`;
+        console.log('Balance input changed to: ' + balance.getBalance());
+        console.log(betAmount);
+    })
+
+    document.getElementById("add10").addEventListener("click", () => {
+        const bet1 = 10; 
+        balance.deduct(bet1);
+        betAmount += 10; 
+        document.getElementById('balanceAmount').textContent = `Balance: $${balance.getBalance()}`; 
+        document.getElementById('betAmount').textContent = `Bet Amount $${betAmount}`;
+        console.log('Balance input changed to: ' + balance.getBalance());
+        console.log(betAmount);
+    })
+
+    document.getElementById("add50").addEventListener("click", () => {
+        const bet1 = 50; 
+        balance.deduct(bet1); 
+        betAmount += 50;
+        document.getElementById('balanceAmount').textContent = `Balance: $${balance.getBalance()}`; 
+        document.getElementById('betAmount').textContent = `Bet Amount $${betAmount}`;
+        console.log('Balance input changed to: ' + balance.getBalance());
+        console.log(betAmount);
+    })
+    document.getElementById("add100").addEventListener("click", () => {
+        const bet1 = 100; 
+        balance.deduct(bet1); 
+        betAmount += 100;
+        document.getElementById('balanceAmount').textContent = `Balance: $${balance.getBalance()}`; 
+        document.getElementById('betAmount').textContent = `Bet Amount $${betAmount}`;
+        console.log('Balance input changed to: ' + balance.getBalance());
+        console.log(betAmount);
+    })
+
+
+
+
+
 
 }
-
-
-
-
 
 
