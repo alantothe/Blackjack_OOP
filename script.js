@@ -235,12 +235,18 @@ class Game {
 
         if (playerScore > 21 || (dealerScore <= 21 && dealerScore > playerScore)) {
             alert("Dealer wins!");
+            betAmount = 0
+            document.getElementById('betAmount').textContent = `Bet Amount $${betAmount}`;
             this.resetGame()
         } else if (dealerScore > 21 || playerScore > dealerScore) {
             alert("Player wins!");
+            betAmount = 0
+            document.getElementById('betAmount').textContent = `Bet Amount $${betAmount}`;
             this.resetGame()
         } else {
-            alert("It's a tie!");
+            alert("Push");
+            betAmount = 0
+            document.getElementById('betAmount').textContent = `Bet Amount $${betAmount}`;
             this.resetGame()
         }
         
@@ -319,7 +325,6 @@ window.onload = function() {
         console.log(betAmount);
 
     })
-
     document.getElementById("add5").addEventListener("click", () => {
         const bet1 = 5; 
         balance.deduct(bet1);
@@ -329,7 +334,6 @@ window.onload = function() {
         console.log('Balance input changed to: ' + balance.getBalance());
         console.log(betAmount);
     })
-
     document.getElementById("add10").addEventListener("click", () => {
         const bet1 = 10; 
         balance.deduct(bet1);
@@ -339,7 +343,6 @@ window.onload = function() {
         console.log('Balance input changed to: ' + balance.getBalance());
         console.log(betAmount);
     })
-
     document.getElementById("add50").addEventListener("click", () => {
         const bet1 = 50; 
         balance.deduct(bet1); 
